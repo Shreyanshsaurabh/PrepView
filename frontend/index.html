@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrepView - Interview Practice</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+<body class="m-0">
+    <div class="w-full">
+      <header
+        class="flex justify-between items-center px-7 py-7 bg-white border-b border-[#e5e7eb] fixed w-full z-10"
+      >
+        <div class="flex items-center gap-2 text-3xl font-bold text-[#1a73e8]">
+          <div
+            class="w-10 h-10 rounded-lg bg-gradient-to-r from-[#1a73e8] to-[#8ab4f8] flex justify-center items-center text-white"
+          >
+            <i class="fas fa-user-tie"></i>
+          </div>
+          PrepView
+        </div>
+        <button
+          class="bg-gradient-to-r from-[#1a73e8] to-[#8ab4f8] px-4 py-2.5 rounded-lg text-white text-base"
+        >
+          Logout
+        </button>
+      </header>
+
+      <div
+        class="flex pt-[84px] w-full h-screen bg-gradient-to-br from-[#ffffff00] to-[#bcd1ff]"
+      >
+        <div
+          class="p-6 border-r border-[#e1e3e8] w-[32vw] h-full overflow-y-auto bg-white/50 backdrop-blur-sm"
+        >
+          <p class="text-center text-[#1f1f1f] text-2xl font-bold mb-6 mt-6">
+            Practice Questions
+          </p>
+
+          <div class="mb-6 p-4 bg-white rounded-2xl shadow-sm border border-[#e1e3e8]">
+            <label class="block text-sm font-medium text-[#374151] mb-2">Custom Practice Topic</label>
+            <div class="flex gap-2">
+              <input 
+                type="text" 
+                id="topicInput" 
+                placeholder="e.g., React, System Design..." 
+                class="w-full px-3 py-2 border border-[#e5e7eb] rounded-xl text-sm focus:outline-none focus:border-[#1a73e8]"
+              />
+              <button 
+                type="button" 
+                id="generateTopicBtn" 
+                class="bg-[#1a73e8] hover:bg-[#1557b0] text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors"
+              >
+                Go
+              </button>
+            </div>
+          </div>
+
+          <div id="faqListContainer"></div>
+        </div>
+
+        <div class="w-[68vw] p-16 h-full overflow-y-auto">
+          <div class="max-w-full">
+            <div
+              class="bg-white p-10 rounded-2xl min-h-[350px] flex flex-col justify-between shadow-sm"
+            >
+              <p
+                class="m-auto text-[#1f1f1f] text-2xl text-center font-bold flex items-center justify-center"
+                id="defaultText"
+              >
+                <i
+                  class="fas fa-circle-question mr-3 text-2xl text-[#1a73e8]"
+                ></i>
+                Select a question to begin
+              </p>
+              <div>
+                <div class="flex items-center mb-4">
+                  <i
+                    class="fas fa-circle-question mr-3 text-2xl text-[#1a73e8] hidden"
+                    id="selectedQuestionIcon"
+                  ></i>
+                  <p
+                    id="selectedQuestion"
+                    class="m-0 text-2xl text-[#1e40af] font-bold leading-relaxed"
+                  ></p>
+                </div>
+                <p
+                  id="userAnswer"
+                  class="text-[#374151] text-base my-4 leading-relaxed"
+                ></p>
+              </div>
+              <div id="recordingSection" class="text-center mt-6">
+                <button
+                  type="button"
+                  id="recordBtn"
+                  class="bg-gradient-to-r from-[#1a73e8] to-[#8ab4f8] text-white px-8 py-4 rounded-xl text-lg inline-flex items-center gap-3 shadow-md"
+                >
+                  <i class="fas fa-microphone"></i>
+                  Record Answer
+                </button>
+                <div
+                  id="recordingStatus"
+                  class="mt-4 text-lg text-[#1e40af] min-h-6"
+                ></div>
+              </div>
+            </div>
+
+            <div id="evaluationResult" class="mt-8 bg-white rounded-2xl hidden shadow-sm">
+              <div class="grid grid-cols-2 gap-6 p-6">
+                <div class="bg-white rounded-xl p-6 border border-[#f3f4f6]">
+                  <div class="flex items-center gap-4 justify-between">
+                    <div class="flex">
+                      <i class="fas fa-check-circle text-2xl text-[#1a73e8] mr-4"></i>
+                      <h4 class="m-0 text-xl text-[#1e40af] font-bold">Correctness Score</h4>
+                    </div>
+                    <span id="correctness-ratio" class="text-lg font-bold text-[#1e40af]">0/5</span>
+                  </div>
+                  <p class="text-sm text-[#374151] mt-2 mb-6 ml-10">
+                    Accuracy and correctness of your response
+                  </p>
+                  <div class="flex gap-2 mt-6 mb-6">
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border border-[#f3f4f6]">
+                  <div class="flex items-center justify-between gap-4">
+                    <div class="flex">
+                      <i class="fas fa-list-check text-2xl text-[#1a73e8] mr-4"></i>
+                      <h4 class="m-0 text-xl text-[#1e40af] font-bold">Completeness Score</h4>
+                    </div>
+                    <span id="completeness-ratio" class="text-lg font-bold text-[#1e40af]">0/5</span>
+                  </div>
+                  <p class="text-sm text-[#374151] mt-2 mb-6 ml-10">
+                    Coverage of key concepts and points
+                  </p>
+                  <div class="flex gap-2 mt-6 mb-6">
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                    <div class="w-24 h-3 bg-[#f3f4f6] rounded-md progress-bar"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="suggestions">
+                <div class="bg-white rounded-xl">
+                  <div class="px-8 pt-6 flex items-center gap-4">
+                    <i class="fas fa-lightbulb text-2xl text-[#1a73e8]"></i>
+                    <h4 class="m-0 text-xl text-[#1e40af] font-bold">Improvement Suggestions</h4>
+                  </div>
+                  <div class="px-8 py-6">
+                    <p id="suggestions-text" class="m-0 text-base text-[#374151] leading-relaxed"></p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script src="index.js?v=3.0"></script>
+  </body>

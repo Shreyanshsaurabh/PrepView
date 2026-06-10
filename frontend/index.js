@@ -1,5 +1,5 @@
-const questionsApiUrl = "http://127.0.0.1:5001/questions";
-const evaluateApiUrl = "http://127.0.0.1:5001/evaluate";
+const questionsApiUrl = "https://prepview-tt7h.onrender.com/questions";
+const evaluateApiUrl = "https://prepview-tt7h.onrender.com/evaluate";
 
 let mediaRecorder;
 let audioChunks = [];
